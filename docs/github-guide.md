@@ -12,7 +12,35 @@
 
 <https://github.com/moebius21/awesome-recsys>
 
-## 2. 第一次使用：安装和配置 Git
+## 2. Git、GitHub、本地和远程
+
+**Git** 是一个版本管理工具。它会记录文件每次修改的历史，让你可以查看差异、恢复旧版本，并与他人协作。
+
+**GitHub** 是托管 Git 仓库的网站。它提供代码存储、网页浏览、Issue、Pull Request 和协作权限等功能。Git 和 GitHub 不是同一个东西：Git 可以在没有 GitHub 的情况下使用，GitHub 则主要使用 Git 来管理项目。
+
+- **本地仓库（local repository）**：电脑上的项目目录，以及其中隐藏的 `.git/` 历史记录。你平时编辑代码、运行实验和执行 `commit`，主要都在本地完成。
+- **远程仓库（remote repository）**：GitHub 上的项目副本，例如 `moebius21/awesome-recsys`。它用于备份、共享和协作。
+- **origin**：远程仓库的一个名字。Clone 后，`origin` 通常指向你自己的 GitHub 仓库。
+- **upstream**：远程仓库的另一个名字。在本课程中，通常用 `upstream` 指向老师的原始仓库。
+
+可以把它理解成：本地仓库是你的工作区，远程仓库是 GitHub 上的共享副本。两者不会自动保持一致，需要用命令同步。
+
+```mermaid
+flowchart LR
+    A[本地工作区\n编辑代码/报告] -->|git add + git commit| B[本地仓库\n保存版本历史]
+    B -->|git push| C[远程仓库 origin\n你的 GitHub Fork]
+    C -->|Pull Request| D[老师的仓库\nmoebius21/awesome-recsys]
+    D -->|git fetch upstream\ngit merge| B
+    C -->|git pull| B
+```
+
+最常见的一次作业流程是：
+
+```text
+修改文件 → git add → git commit → git push → GitHub 上创建 Pull Request
+```
+
+## 3. 第一次使用：安装和配置 Git
 
 安装 Git：<https://git-scm.com/downloads>
 
@@ -26,7 +54,7 @@ git config --global user.email "你的 GitHub 邮箱"
 
 `user.name` 和 `user.email` 会写入提交记录。邮箱建议使用 GitHub 账号中已验证的邮箱。
 
-## 3. Fork 老师的仓库
+## 4. Fork 老师的仓库
 
 1. 打开项目主页。
 2. 点击右上角 **Fork**。
@@ -37,7 +65,7 @@ git config --global user.email "你的 GitHub 邮箱"
 
 以后不要直接修改老师的仓库，先在自己的 Fork 中完成作业。
 
-## 4. Clone 到本地电脑
+## 5. Clone 到本地电脑
 
 打开你自己的仓库，点击 **Code → HTTPS → Copy**，然后在终端执行：
 
@@ -53,7 +81,7 @@ git remote -v
 git status
 ```
 
-## 5. 创建自己的分支
+## 6. 创建自己的分支
 
 不要直接在 `main` 分支上写作业：
 
@@ -73,7 +101,7 @@ git switch -c homework/20230001
 git branch --show-current
 ```
 
-## 6. 提交作业文件
+## 7. 提交作业文件
 
 复制 `submission-template/`，把作业放到：
 
@@ -97,7 +125,7 @@ git commit -m "Submit recommendation system project"
 
 提交信息要说明这次做了什么，不要使用 `update`、`test` 这类无法说明内容的标题。
 
-## 7. Push 到自己的 GitHub 仓库
+## 8. Push 到自己的 GitHub 仓库
 
 ```bash
 git push -u origin homework/你的学号
@@ -105,7 +133,7 @@ git push -u origin homework/你的学号
 
 第一次 Push 时，GitHub 可能要求浏览器登录或授权。不要把密码、Token 写进命令或提交到代码里。
 
-## 8. 创建 Pull Request
+## 9. 创建 Pull Request
 
 Push 成功后打开自己的 GitHub 仓库，通常会看到 **Compare & pull request**，点击它。
 
@@ -133,7 +161,7 @@ compare branch:  homework/你的学号
 
 最后点击 **Create pull request**。Pull Request 提交后，老师会在 GitHub 上检查代码并留言。
 
-## 9. 根据老师意见修改
+## 10. 根据老师意见修改
 
 Pull Request 不需要重新创建。继续在同一个分支修改：
 
@@ -145,7 +173,7 @@ git push
 
 新的提交会自动出现在原来的 Pull Request 中。
 
-## 10. 同步老师仓库的最新内容
+## 11. 同步老师仓库的最新内容
 
 第一次同步前，添加老师仓库地址：
 
@@ -169,7 +197,7 @@ git switch homework/你的学号
 git merge main
 ```
 
-## 11. 最常见的问题
+## 12. 最常见的问题
 
 ### `git: command not found`
 
@@ -211,7 +239,7 @@ git commit -m "Resolve merge conflict"
 git push
 ```
 
-## 12. 提交前检查清单
+## 13. 提交前检查清单
 
 - [ ] 作业在 `submissions/学号-姓名/` 下
 - [ ] 没有提交数据集、密码、Token、`.venv/` 或大文件
@@ -219,4 +247,3 @@ git push
 - [ ] 在干净环境中测试过主要命令
 - [ ] `git status` 没有遗漏文件
 - [ ] Pull Request 的目标仓库和分支正确
-
