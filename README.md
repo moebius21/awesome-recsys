@@ -49,6 +49,8 @@ python scripts/prepare_movielens.py --input data/raw/ml-100k --output data/proce
 
 详见 `docs/assignment.md` 和 `docs/evaluation.md`。
 
+第一次使用 GitHub 的同学请先阅读 `docs/github-guide.md`，按指南完成 Fork、Clone、分支、Push 和 Pull Request。
+
 ## 许可说明
 
 本仓库中的课程文字、脚本和模板采用 MIT License。外部数据集仍以其原始提供方的许可和使用条款为准；本仓库不重新分发原始数据。
